@@ -96,8 +96,8 @@ public class TexturePackerImporter : AssetPostprocessor
 			float y = float.Parse (cols [2]);
 			float w = float.Parse (cols [3]);
 			float h = float.Parse (cols [4]);
-			float px = float.Parse (cols [5]);
-			float py = float.Parse (cols [6]);
+			//float px = float.Parse (cols [5]);
+			//float py = float.Parse (cols [6]);
 
 			smd.rect = new UnityEngine.Rect (x, y, w, h);
 			//smd.pivot = new UnityEngine.Vector2 (px, py);

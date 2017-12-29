@@ -21,9 +21,12 @@ namespace MrNibblesML
         protected const float minMoveDistance = 0.001f;
         protected const float shellRadius = 0.01f;
 
-        void OnEnable()
+        protected virtual void OnEnable()
         {
             rb2d = GetComponent<Rigidbody2D>();
+            rb2d.velocity = velocity = Vector2.zero;
+            rb2d.rotation = 0;
+            grounded = false;
         }
 
         void Start()
