@@ -7,7 +7,7 @@ namespace MrNibblesML
     {
         void OnTriggerEnter2D()
         {
-            FindObjectOfType<LevelTransitionController>()
+            FindObjectOfType<GameController>()
                 .BeginTransition();
         }
     }

@@ -109,5 +109,6 @@ namespace MrNibblesML
             rb2d.position = rb2d.position + move.normalized * distance;
         }
 
+        public bool IsGrounded => grounded;
     }
 }

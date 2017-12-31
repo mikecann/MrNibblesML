@@ -5,7 +5,7 @@ using Random = UnityEngine.Random;
 
 namespace MrNibblesML
 {
-    public class LevelTransitionController : MonoBehaviour
+    public class GameController : MonoBehaviour
     {
         public Animator animator;
         public CinemachineConfiner virtualCameraConfiner;
@@ -16,9 +16,9 @@ namespace MrNibblesML
         {
             _player = FindObjectOfType<PlayerPlatformerController>();
 
-            var level = GetActiveLevel();
-            SetCameraBounds(level);
-            SpawnPlayer(level);
+            CurrentLevel = GetActiveLevel();
+            SetCameraBounds(CurrentLevel);
+            SpawnPlayer(CurrentLevel);
         }
 
         public void BeginTransition()
@@ -31,12 +31,10 @@ namespace MrNibblesML
         {
             DisableLastLevel();
 
-            var nextLevel = GetNextLevel();
-            nextLevel.SetActive(true);
-
-            SetCameraBounds(nextLevel);
-
-            SpawnPlayer(nextLevel);
+            CurrentLevel = GetNextLevel();
+            CurrentLevel.SetActive(true);
+            SetCameraBounds(CurrentLevel);
+            SpawnPlayer(CurrentLevel);
         }
 
         private void SetCameraBounds(GameObject level)
@@ -73,5 +71,7 @@ namespace MrNibblesML
             return transform.GetChild(Random.Range(0, transform.childCount))
                 .gameObject;
         }
+
+        public GameObject CurrentLevel { get; private set; }
     }
 }

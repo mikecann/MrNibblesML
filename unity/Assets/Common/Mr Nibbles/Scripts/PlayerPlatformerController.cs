@@ -12,7 +12,6 @@ namespace MrNibblesML
         private SpriteRenderer spriteRenderer;
         private Animator animator;
 
-        // Use this for initialization
         void Awake()
         {
             spriteRenderer = GetComponent<SpriteRenderer>();
@@ -23,13 +22,13 @@ namespace MrNibblesML
         {
             Vector2 move = Vector2.zero;
 
-            move.x = Input.GetAxis("Horizontal");
+            move.x = MrNibblesInput.HorizontalAxis;
 
-            if (Input.GetButtonDown("Jump") && grounded)
+            if (MrNibblesInput.Jump && grounded)
             {
                 velocity.y = jumpTakeOffSpeed;
             }
-            else if (Input.GetButtonUp("Jump"))
+            else if (!MrNibblesInput.Jump)
             {
                 if (velocity.y > 0)
                 {

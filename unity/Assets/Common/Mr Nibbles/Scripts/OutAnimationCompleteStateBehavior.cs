@@ -8,7 +8,7 @@ namespace MrNibblesML
     {
         override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            FindObjectOfType<LevelTransitionController>()
+            FindObjectOfType<GameController>()
                 .AnimationMidpointReached();
         }
     }
