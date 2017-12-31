@@ -36,19 +36,21 @@ namespace MrNibblesML
             contactFilter.useLayerMask = true;
         }
 
-        protected virtual void Update()
+        //protected virtual void Update()
+        //{
+        //    targetVelocity = Vector2.zero;
+        //    ComputeVelocity();
+        //}
+
+        protected virtual void ComputeVelocity(float horizontalMovement, bool isjumping)
+        {
+        }
+
+        public void Tick(float horizontalMovement, bool isjumping)
         {
             targetVelocity = Vector2.zero;
-            ComputeVelocity();
-        }
+            ComputeVelocity(horizontalMovement, isjumping);
 
-        protected virtual void ComputeVelocity()
-        {
-
-        }
-
-        protected virtual void FixedUpdate()
-        {
             velocity += gravityModifier * Physics2D.gravity * Time.deltaTime;
             velocity.x = targetVelocity.x;
 
@@ -102,8 +104,6 @@ namespace MrNibblesML
                     float modifiedDistance = hitBufferList[i].distance - shellRadius;
                     distance = modifiedDistance < distance ? modifiedDistance : distance;
                 }
-
-
             }
 
             rb2d.position = rb2d.position + move.normalized * distance;

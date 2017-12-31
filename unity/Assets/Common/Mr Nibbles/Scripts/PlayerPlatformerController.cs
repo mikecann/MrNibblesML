@@ -18,17 +18,17 @@ namespace MrNibblesML
             animator = GetComponent<Animator>();
         }
 
-        protected override void ComputeVelocity()
+        protected override void ComputeVelocity(float horizontalMovement, bool isjumping)
         {
             Vector2 move = Vector2.zero;
 
-            move.x = MrNibblesInput.HorizontalAxis;
+            move.x = horizontalMovement;
 
-            if (MrNibblesInput.Jump && grounded)
+            if (isjumping && grounded)
             {
                 velocity.y = jumpTakeOffSpeed;
             }
-            else if (!MrNibblesInput.Jump)
+            else if (!isjumping)
             {
                 if (velocity.y > 0)
                 {

@@ -9,6 +9,7 @@ namespace MrNibblesML
     {
         public Animator animator;
         public CinemachineConfiner virtualCameraConfiner;
+        public GameObject[] levels;
 
         private PlayerPlatformerController _player;
 
@@ -21,10 +22,17 @@ namespace MrNibblesML
             SpawnPlayer(CurrentLevel);
         }
 
+        public void RestartLevel()
+        {
+            SpawnPlayer(CurrentLevel);
+            Deaths++;
+        }
+
         public void BeginTransition()
         {
             _player.gameObject.SetActive(false);
             animator.SetTrigger("transition");
+            Wins++;
         }
 
         public void AnimationMidpointReached()
@@ -68,10 +76,13 @@ namespace MrNibblesML
 
         private GameObject GetNextLevel()
         {
-            return transform.GetChild(Random.Range(0, transform.childCount))
-                .gameObject;
+            return levels[Random.Range(0, levels.Length)];
         }
 
         public GameObject CurrentLevel { get; private set; }
+        public int Deaths { get; private set; }
+        public int Wins { get; private set; }
+
+        
     }
 }

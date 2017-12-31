@@ -5,36 +5,30 @@ using UnityEngine.Tilemaps;
 
 namespace MrNibblesML
 {
-    public class LevelTilemap : MonoBehaviour
+    public class TilesController : MonoBehaviour
     {
-        public TileBase pipe;
-        public TileBase spider;
+        public Tilemap pipemap;
+        public Tilemap spidermap;
 
-        private Tilemap _tilemap;
-
-        void Awake()
+        public IEnumerable<TileInfo> GetTiles(BoundsInt bounds)
         {
-            _tilemap = GetComponent<Tilemap>();
-        }
-
-        public IEnumerable<LevelTile> GetTiles(BoundsInt bounds)
-        {
-            var state = new List<LevelTile>();
+            var state = new List<TileInfo>();
 
             for (int ix = 0; ix < bounds.size.x; ix++)
             {
                 for (int iy = 0; iy < bounds.size.y; iy++)
                 {
                     var pos = new Vector3Int(ix + bounds.xMin, iy+ bounds.yMin, 0);
-                    var tile = _tilemap.GetTile(pos);
+                    var pipemapTile = pipemap.GetTile(pos);
+                    var spidermapTile = spidermap.GetTile(pos);
                     var type = 0;
 
-                    if (tile == pipe)
+                    if (pipemapTile)
                         type = 1;
-                    else if (tile == spider)
+                    else if (spidermapTile)
                         type = 2;
 
-                    state.Add(new LevelTile
+                    state.Add(new TileInfo
                     {
                         position = new Vector2(ix,iy),
                         type = type
@@ -45,7 +39,7 @@ namespace MrNibblesML
             return state;
         }
 
-        public class LevelTile
+        public class TileInfo
         {
             public Vector2 position;
             public int type;
