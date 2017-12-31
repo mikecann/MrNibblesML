@@ -95,7 +95,7 @@ namespace MrNibbles
 
                     _player.Tick(hozMove, isJumping);
 
-                    reward = -0.01f;
+                    reward -= 0.01f;
                     done = false;
                 }
             }
