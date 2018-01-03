@@ -70,3 +70,5 @@
 *.gitignore.swp
 
 .DS_Store
+
+/python/mrnibbles1d_Data

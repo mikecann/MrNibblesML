@@ -46,7 +46,7 @@ namespace MrNibbles1D
                 AgentSucceed();
             else
             {
-                reward -= 0.005f;
+                reward -= 0.01f;
                 if (_lastAction != action[0])
                     reward -= 0.5f;
 

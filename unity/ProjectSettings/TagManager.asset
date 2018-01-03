@@ -52,3 +52,6 @@ TagManager:
   - name: Level Transitioner
     uniqueID: 1071194879
     locked: 0
+  - name: Hud
+    uniqueID: 2214483579
+    locked: 0
