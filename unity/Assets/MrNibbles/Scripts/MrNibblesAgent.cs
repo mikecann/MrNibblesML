@@ -72,14 +72,14 @@ namespace MrNibbles
             if (_exitPoint.IsTriggered)
             {
                 Wins++;
+                reward = 10;
                 done = true;
-                reward = 1;
             }
             else if (_spiders.IsTriggered)
             {
                 Deaths++;
+                reward = -10;
                 done = true;
-                reward = -1;
             }
             else
             {
