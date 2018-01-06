@@ -21,26 +21,17 @@ namespace MrNibblesML
         protected const float minMoveDistance = 0.001f;
         protected const float shellRadius = 0.01f;
 
-        protected virtual void OnEnable()
+        public void Reset()
         {
             rb2d = GetComponent<Rigidbody2D>();
             rb2d.velocity = velocity = Vector2.zero;
             rb2d.rotation = 0;
             grounded = false;
-        }
 
-        void Start()
-        {
             contactFilter.useTriggers = false;
             contactFilter.SetLayerMask(Physics2D.GetLayerCollisionMask(gameObject.layer));
             contactFilter.useLayerMask = true;
         }
-
-        //protected virtual void Update()
-        //{
-        //    targetVelocity = Vector2.zero;
-        //    ComputeVelocity();
-        //}
 
         protected virtual void ComputeVelocity(float horizontalMovement, bool isjumping)
         {

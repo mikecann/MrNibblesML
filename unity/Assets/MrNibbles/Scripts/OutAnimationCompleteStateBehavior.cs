@@ -6,10 +6,10 @@ namespace MrNibblesML
 {
     public class OutAnimationCompleteStateBehavior : StateMachineBehaviour
     {
-        override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-        {
-            FindObjectOfType<GameController>()
-                .AnimationMidpointReached();
-        }
+        //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+        //{
+        //    FindObjectOfType<GameController>()
+        //        .AnimationMidpointReached();
+        //}
     }
 }

@@ -17,17 +17,9 @@ namespace MrNibbles
 
         private PlayerPlatformerController _player;
         private GameController _game;
-        private GameObject _currentLevel;
         private IEnumerable<TilesController.TileInfo> _tiles;
         private ExitLevelTrigger _exitPoint;
         private SpiderMap _spiders;
-
-        void Awake()
-        {
-            _player = GetComponent<PlayerPlatformerController>();
-            _game = FindObjectOfType<GameController>();
-            _spiders = FindObjectOfType<SpiderMap>();
-        }
 
         public override List<float> CollectState()
         {
@@ -49,16 +41,7 @@ namespace MrNibbles
             return state;
         }
 
-        private void UpdateStateConstants()
-        {
-            _tiles = _game.CurrentLevel.GetComponentInChildren<TilesController>()
-                .GetTiles(tileBoundsToIncludeInState);
-
-            _exitPoint = _game.CurrentLevel.GetComponentInChildren<ExitLevelTrigger>();
-            _currentLevel = _game.CurrentLevel;
-        }
-
-        public override void AgentStep(float[] actions)
+       public override void AgentStep(float[] actions)
         {
             PerformActions(actions);
             HandleStateConditions();
@@ -90,28 +73,35 @@ namespace MrNibbles
             {
                 Wins++;
                 done = true;
-                reward += 10;
+                reward = 1;
             }
             else if (_spiders.IsTriggered)
             {
                 Deaths++;
                 done = true;
-                reward += -10;
+                reward = -1;
             }
             else
             {
-                reward -= 0.01f;
+                reward = -0.01f;
             }
         }
 
         public override void AgentReset()
         {
-            UpdateStateConstants();
-            _exitPoint.Reset();
-            _spiders.Reset();
-            _game.ChangeToNextLevel();
-            reward = 0;
-            done = true;
+            if (IsFirstRun()==false)
+                _game.ChangeToNextLevel();
+
+            _player = GetComponent<PlayerPlatformerController>();
+            _game = FindObjectOfType<GameController>();
+            _tiles = _game.CurrentLevel.GetComponentInChildren<TilesController>().GetTiles(tileBoundsToIncludeInState);
+            _exitPoint = _game.CurrentLevel.GetComponentInChildren<ExitLevelTrigger>();
+            _spiders = FindObjectOfType<SpiderMap>();
+        }
+
+        private bool IsFirstRun()
+        {
+            return _game==null;
         }
 
         public int Deaths { get; set; }

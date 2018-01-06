@@ -11,21 +11,9 @@ namespace MrNibblesML
             IsTriggered = true;
         }
 
-        public void Reset()
+        void OnEnable()
         {
             IsTriggered = false;
         }
-
-        //private Collider2D _collider;
-
-        //void Awake()
-        //{
-        //    _collider = GetComponent<Collider2D>();
-        //}
-
-        //public bool IsTriggered(PlayerPlatformerController player)
-        //{
-        //    return _collider.OverlapPoint(new Vector2(player.transform.position.x, player.transform.position.y));
-        //}
     }
 }

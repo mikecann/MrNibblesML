@@ -25,46 +25,19 @@ namespace MrNibblesML
             SpawnPlayer(CurrentLevel);
         }
 
-        //public void BeginTransition()
-        //{
-        //    _player.gameObject.SetActive(false);
-        //    animator.SetTrigger("transition");
-        //}
-
         public void ChangeToNextLevel()
         {
+            CurrentLevel.SetActive(false);
             CurrentLevel = GetNextLevel();
             CurrentLevel.SetActive(true);
             SpawnPlayer(CurrentLevel);
         }
-
-        public void AnimationMidpointReached()
-        {
-            DisableLastLevel();
-
-            CurrentLevel = GetNextLevel();
-            CurrentLevel.SetActive(true);
-            SpawnPlayer(CurrentLevel);
-        }
-
-        //private void SetCameraBounds(GameObject level)
-        //{
-        //    var bounds = level.GetComponentInChildren<CameraBounds>();
-        //    virtualCameraConfiner.m_BoundingShape2D =
-        //        bounds.GetComponent<PolygonCollider2D>();
-        //}
 
         private void SpawnPlayer(GameObject level)
         {
-            _player.gameObject.SetActive(true);
-
-            level.GetComponentInChildren<PlayerSpawnPoint>()
-                .SpawnPlayer();
-        }
-
-        private void DisableLastLevel()
-        {
-            GetActiveLevel().SetActive(false);
+            var spawnPoint = level.GetComponentInChildren<PlayerSpawnPoint>();
+            _player.transform.position = spawnPoint.transform.position;
+            _player.Reset();
         }
 
         private GameObject GetActiveLevel()
