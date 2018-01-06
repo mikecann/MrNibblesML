@@ -47,10 +47,10 @@
 *.x86
 
 # Tensorflow Sharp Files
-/unity/Assets/ML-Agents/Plugins/Android*
-/unity/Assets/ML-Agents/Plugins/iOS*
-/unity/Assets/ML-Agents/Plugins/Computer*
-/unity/Assets/ML-Agents/Plugins/System*
+/unity/Assets/Lib/ML-Agents/Plugins/Android*
+/unity/Assets/Lib/ML-Agents/Plugins/iOS*
+/unity/Assets/Lib/ML-Agents/Plugins/Computer*
+/unity/Assets/Lib/ML-Agents/Plugins/System*
 
 
 # Mac hidden files
@@ -71,4 +71,7 @@
 
 .DS_Store
 
+/python/mrnibbles1d.exe
 /python/mrnibbles1d_Data
+/python/mrnibbles_Data
+/python/mrnibbles.exe

@@ -20,8 +20,8 @@ namespace MrNibbles
         public void Update()
         {
             var str = $"Cumulative Reward: {_agent.CumulativeReward}\n";
-            str += $"Deaths: {_game.Deaths}\n";
-            str += $"Wins: {_game.Wins}\n";
+            str += $"Deaths: {_agent.Deaths}\n";
+            str += $"Wins: {_agent.Wins}\n";
 
             text.text = str;
         }
