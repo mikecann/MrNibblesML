@@ -15,7 +15,7 @@ namespace MrNibbles
 
         public BoundsInt tileBoundsToIncludeInState = new BoundsInt(-25, -1, 0, 40, 1, 1);
 
-        private PlayerPlatformerController _player;
+        private PlayerPlatformerController _platformController;
         private GameController _game;
         private IEnumerable<TilesController.TileInfo> _tiles;
         private ExitLevelTrigger _exitPoint;
@@ -34,9 +34,9 @@ namespace MrNibbles
             state.Add(_exitPoint.transform.position.x);
             state.Add(_exitPoint.transform.position.y);
 
-            state.Add(_player.transform.position.x);
-            state.Add(_player.transform.position.y);
-            state.Add(_player.IsGrounded ? 1 : 0);
+            state.Add(_platformController.transform.position.x);
+            state.Add(_platformController.transform.position.y);
+            state.Add(_platformController.IsGrounded ? 1 : 0);
 
             return state;
         }
@@ -44,7 +44,7 @@ namespace MrNibbles
        public override void AgentStep(float[] actions)
         {
             PerformActions(actions);
-            HandleStateConditions();
+            UpdateRewards();
         }
 
         private void PerformActions(float[] actions)
@@ -64,10 +64,10 @@ namespace MrNibbles
             if (jump)
                 isJumping = true;
 
-            _player.Tick(hozMove, isJumping);
+            _platformController.Tick(hozMove, isJumping);
         }
 
-        private void HandleStateConditions()
+        private void UpdateRewards()
         {
             if (_exitPoint.IsTriggered)
             {
@@ -92,7 +92,7 @@ namespace MrNibbles
             if (IsFirstRun()==false)
                 _game.ChangeToNextLevel();
 
-            _player = GetComponent<PlayerPlatformerController>();
+            _platformController = GetComponent<PlayerPlatformerController>();
             _game = FindObjectOfType<GameController>();
             _tiles = _game.CurrentLevel.GetComponentInChildren<TilesController>().GetTiles(tileBoundsToIncludeInState);
             _exitPoint = _game.CurrentLevel.GetComponentInChildren<ExitLevelTrigger>();
