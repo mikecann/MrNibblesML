@@ -4,7 +4,7 @@
 
 This is the code for my experiments with Mr Nibbles and Machine Learning. 
 
-Read more about this and follow along on my series [A Game Developer Learns Machine Learning](https://mikecann.co.uk/all-tags/#AGDLML).
+Read more about this and follow along on my series [A Game Developer Learns Machine Learning](https://mikecann.co.uk/all-tags/#AGDLML). 
 
 ## Usage
 
