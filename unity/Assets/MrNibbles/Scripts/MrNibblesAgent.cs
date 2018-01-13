@@ -21,6 +21,12 @@ namespace MrNibbles
         private ExitLevelTrigger _exitPoint;
         private SpiderMap _spiders;
 
+        void Awake()
+        {
+            _game = FindObjectOfType<GameController>();
+            _platformController = GetComponent<PlayerPlatformerController>();
+        }
+
         public override List<float> CollectState()
         {
             var state = new List<float>();
@@ -89,19 +95,10 @@ namespace MrNibbles
 
         public override void AgentReset()
         {
-            if (IsFirstRun()==false)
-                _game.ChangeToNextLevel();
-
-            _platformController = GetComponent<PlayerPlatformerController>();
-            _game = FindObjectOfType<GameController>();
+            _game.ChangeToNextLevel();
             _tiles = _game.CurrentLevel.GetComponentInChildren<TilesController>().GetTiles(tileBoundsToIncludeInState);
             _exitPoint = _game.CurrentLevel.GetComponentInChildren<ExitLevelTrigger>();
             _spiders = FindObjectOfType<SpiderMap>();
-        }
-
-        private bool IsFirstRun()
-        {
-            return _game==null;
         }
 
         public int Deaths { get; set; }
