@@ -42,7 +42,8 @@ namespace MrNibbles
 
             state.Add(_platformController.transform.position.x);
             state.Add(_platformController.transform.position.y);
-            state.Add(_platformController.IsGrounded ? 1 : 0);
+            state.Add(_platformController.Velocity.x);
+            state.Add(_platformController.Velocity.y);
 
             return state;
         }

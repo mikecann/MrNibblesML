@@ -101,5 +101,6 @@ namespace MrNibblesML
         }
 
         public bool IsGrounded => grounded;
+        public Vector2 Velocity => targetVelocity;
     }
 }

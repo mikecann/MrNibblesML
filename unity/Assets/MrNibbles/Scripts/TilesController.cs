@@ -14,11 +14,11 @@ namespace MrNibblesML
         {
             var state = new List<TileInfo>();
 
-            for (int ix = 0; ix < bounds.size.x; ix++)
+            for (var ix = bounds.xMin; ix < bounds.xMax; ix++)
             {
-                for (int iy = 0; iy < bounds.size.y; iy++)
+                for (var iy = bounds.yMin; iy < bounds.yMax; iy++)
                 {
-                    var pos = new Vector3Int(ix + bounds.xMin, iy+ bounds.yMin, 0);
+                    var pos = new Vector3Int(ix, iy, 0);
                     var pipemapTile = pipemap.GetTile(pos);
                     var spidermapTile = spidermap.GetTile(pos);
                     var type = 0;
