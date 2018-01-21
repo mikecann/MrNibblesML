@@ -52,6 +52,7 @@ namespace MrNibbles
         {
             PerformActions(actions);
             UpdateRewards();
+            HandleSessionTooLong();
         }
 
         private void PerformActions(float[] actions)
@@ -91,6 +92,15 @@ namespace MrNibbles
             else
             {
                 reward = -0.01f;
+            }
+        }
+
+        private void HandleSessionTooLong()
+        {
+            if (CumulativeReward < -80)
+            {
+                reward = -10;
+                done = true;
             }
         }
 
