@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -10,15 +11,21 @@ namespace MrNibblesML
         public Tilemap pipemap;
         public Tilemap spidermap;
 
-        public IEnumerable<TileInfo> GetTiles(BoundsInt bounds)
+        public BoundsInt GetBoundsAround(Transform transform, int width, int height)
         {
-            var state = new List<TileInfo>();
+            var centre = pipemap.WorldToCell(transform.position);
+            return new BoundsInt(centre.x-width/2, centre.y-height/2, 0, width, height, 1);
+        }
 
-            for (var ix = bounds.xMin; ix < bounds.xMax; ix++)
+        public void GetTilesAround(BoundsInt bounds, TileInfo[] tiles)
+        {
+            var xi = 0;
+            for (var x = bounds.xMin; x < bounds.xMax; x++, xi++)
             {
-                for (var iy = bounds.yMin; iy < bounds.yMax; iy++)
+                var yi = 0;
+                for (var y = bounds.yMin; y < bounds.yMax; y++, yi++)
                 {
-                    var pos = new Vector3Int(ix, iy, 0);
+                    var pos = new Vector3Int(x, y, 0);
                     var pipemapTile = pipemap.GetTile(pos);
                     var spidermapTile = spidermap.GetTile(pos);
                     var type = 0;
@@ -28,15 +35,14 @@ namespace MrNibblesML
                     else if (spidermapTile)
                         type = 2;
 
-                    state.Add(new TileInfo
-                    {
-                        position = new Vector2(pos.x, pos.y),
-                        type = type
-                    });
+                    var index = xi + (yi * bounds.size.x);
+                    if (tiles[index]==null)
+                        tiles[index] = new TileInfo();
+
+                    tiles[index].position = new Vector2(pos.x, pos.y);
+                    tiles[index].type = type;
                 }
             }
-
-            return state;
         }
 
         public class TileInfo

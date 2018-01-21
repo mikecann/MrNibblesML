@@ -13,23 +13,32 @@ namespace MrNibbles
         public const int MoveRight = 2;
         public const int Jump = 3;
 
-        public BoundsInt tileBoundsToIncludeInState = new BoundsInt(-25, -1, 0, 40, 1, 1);
+        public int tilesAroundNibblesW = 5;
+        public int tilesAroundNibblesH = 5;
 
         private PlayerPlatformerController _platformController;
         private GameController _game;
-        private IEnumerable<TilesController.TileInfo> _tiles;
+        private TilesController.TileInfo[] _tiles;
         private ExitLevelTrigger _exitPoint;
         private SpiderMap _spiders;
+        private TilesController _tilesController;
 
         void Awake()
         {
             _game = FindObjectOfType<GameController>();
             _platformController = GetComponent<PlayerPlatformerController>();
+            _tiles = new TilesController.TileInfo[tilesAroundNibblesW *
+                tilesAroundNibblesH]; 
         }
 
         public override List<float> CollectState()
         {
             var state = new List<float>();
+
+            // Populate the _tiles array with the tiles that surround us
+            var bounds = _tilesController.GetBoundsAround(transform, tilesAroundNibblesW, tilesAroundNibblesH);
+            _tilesController.GetTilesAround(bounds, _tiles);
+
             foreach (var tile in _tiles)
             {
                 state.Add(tile.position.x);
@@ -107,7 +116,7 @@ namespace MrNibbles
         public override void AgentReset()
         {
             _game.ChangeToNextLevel();
-            _tiles = _game.CurrentLevel.GetComponentInChildren<TilesController>().GetTiles(tileBoundsToIncludeInState);
+            _tilesController = _game.CurrentLevel.GetComponentInChildren<TilesController>();
             _exitPoint = _game.CurrentLevel.GetComponentInChildren<ExitLevelTrigger>();
             _spiders = FindObjectOfType<SpiderMap>();
         }
