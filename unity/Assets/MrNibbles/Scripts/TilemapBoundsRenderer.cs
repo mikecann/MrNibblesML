@@ -11,7 +11,6 @@ namespace MrNibbles
 #if UNITY_EDITOR
         private static Texture2D gizmoBg;
         private static TilesController.TileInfo[] tiles;
-        private static TilesController tilesController;
         void OnDrawGizmos()
         {
             if (gizmoBg == null)
@@ -20,8 +19,7 @@ namespace MrNibbles
             if (agent == null)
                 return;
 
-            if (tilesController == null || !tilesController.gameObject.activeSelf)
-                tilesController = FindObjectOfType<TilesController>();
+            var tilesController = GetComponentInChildren<TilesController>(false);
 
             if (tilesController == null)
                 return;

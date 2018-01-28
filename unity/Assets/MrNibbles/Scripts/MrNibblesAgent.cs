@@ -29,6 +29,7 @@ namespace MrNibbles
         {
             _game = FindObjectOfType<GameController>();
             _platformController = GetComponent<PlayerPlatformerController>();
+            _tilesController = _game.CurrentLevel.GetComponentInChildren<TilesController>();
             _tiles = new TilesController.TileInfo[tilesAroundNibblesW *
                 tilesAroundNibblesH]; 
         }
@@ -104,13 +105,13 @@ namespace MrNibbles
             if (_exitPoint.IsTriggered)
             {
                 Wins++;
-                reward = 1;
+                reward = 5;
                 done = true;
             }
             else if (_spiders.IsTriggered)
             {
                 Deaths++;
-                reward = -1;
+                reward = -5;
                 done = true;
             }
             else
