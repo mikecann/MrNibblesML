@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -88,7 +88,6 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaDirect: 0.5
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
-    m_ShowResolutionOverlay: 1
   m_LightingDataAsset: {fileID: 0}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -257,8 +256,8 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 24508265}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -2.58, y: 3.76, z: 91}
+  m_LocalScale: {x: 0.012000931, y: 0.012000931, z: 0.012000931}
   m_Children:
   - {fileID: 1731440809}
   m_Father: {fileID: 0}
@@ -289,7 +288,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1465528279}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.09, y: 0.77, z: 1}
+  m_LocalPosition: {x: -2.58, y: 3.76, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -381,6 +380,46 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   magnitude: 0.5
+--- !u!114 &127951989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41e9bda8f3cf1492fa74926a530f6f70, type: 3}
+  m_Name: (Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)
+  m_EditorClassIdentifier: 
+  broadcast: 1
+  continuousPlayerActions:
+  - key: 0
+    index: 0
+    value: 1
+  - key: 276
+    index: 1
+    value: 1
+  - key: 275
+    index: 2
+    value: 1
+  - key: 32
+    index: 3
+    value: 1
+  discretePlayerActions:
+  - key: 0
+    value: 0
+  - key: 97
+    value: 1
+  - key: 100
+    value: 2
+  - key: 119
+    value: 3
+  - key: 101
+    value: 4
+  - key: 113
+    value: 5
+  defaultAction: 0
+  brain: {fileID: 849701452}
 --- !u!1 &135992325
 GameObject:
   m_ObjectHideFlags: 0
@@ -496,8 +535,8 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 290937314}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -2.58, y: 3.76, z: 91}
+  m_LocalScale: {x: 0.012000931, y: 0.012000931, z: 0.012000931}
   m_Children:
   - {fileID: 332297785}
   m_Father: {fileID: 0}
@@ -633,7 +672,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0aecf19ba57290c418a26054d66a812a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &426367983
+--- !u!114 &472338286
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -642,7 +681,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 35813a1be64e144f887d7d5f15b963fa, type: 3}
-  m_Name: (Clone)(Clone)(Clone)(Clone)(Clone)
+  m_Name: (Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)
   m_EditorClassIdentifier: 
   brain: {fileID: 849701452}
 --- !u!1 &520483896
@@ -2212,28 +2251,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &528552246
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b23992c8eb17439887f5e944bf04a40, type: 3}
-  m_Name: (Clone)(Clone)(Clone)(Clone)(Clone)
-  m_EditorClassIdentifier: 
-  broadcast: 1
-  graphModel: {fileID: 0}
-  graphScope: 
-  graphPlaceholders: []
-  BatchSizePlaceholderName: batch_size
-  StatePlacholderName: state
-  RecurrentInPlaceholderName: recurrent_in
-  RecurrentOutPlaceholderName: recurrent_out
-  ObservationPlaceholderName: []
-  ActionPlaceholderName: action
-  brain: {fileID: 0}
 --- !u!1 &550967708
 GameObject:
   m_ObjectHideFlags: 0
@@ -3687,7 +3704,6 @@ Camera:
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
-  m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -3699,7 +3715,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 810662627}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.09, y: 0.77, z: -9}
+  m_LocalPosition: {x: -2.58, y: 3.76, z: -9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 135992326}
@@ -3777,24 +3793,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   brainParameters:
-    stateSize: 606
-    actionSize: 4
+    stateSize: 385
+    actionSize: 6
     memorySize: 0
     cameraResolutions: []
     actionDescriptions:
     - None
     - Left
     - Right
-    - Jumps
-    actionSpaceType: 1
+    - Jump
+    - Jump Right
+    - Jump Left
+    actionSpaceType: 0
     stateSpaceType: 1
-  brainType: 0
+  brainType: 2
   CoreBrains:
-  - {fileID: 1911977939}
-  - {fileID: 1013505524}
-  - {fileID: 426367983}
-  - {fileID: 528552246}
-  instanceID: 43218
+  - {fileID: 127951989}
+  - {fileID: 1157673565}
+  - {fileID: 472338286}
+  - {fileID: 1314355780}
+  instanceID: 11746
 --- !u!1 &911058160
 GameObject:
   m_ObjectHideFlags: 0
@@ -4265,19 +4283,6 @@ MonoBehaviour:
     FarClipPlane: 5000
     Dutch: 0
   m_ComponentOwner: {fileID: 2086821117}
---- !u!114 &1013505524
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 943466ab374444748a364f9d6c3e2fe2, type: 3}
-  m_Name: (Clone)(Clone)(Clone)(Clone)(Clone)
-  m_EditorClassIdentifier: 
-  broadcast: 1
-  brain: {fileID: 0}
 --- !u!1 &1025025427
 GameObject:
   m_ObjectHideFlags: 3
@@ -4793,6 +4798,19 @@ Tilemap:
     m_DirtyIndex: 0
   - serializedVersion: 1
     m_DirtyIndex: 0
+--- !u!114 &1157673565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 943466ab374444748a364f9d6c3e2fe2, type: 3}
+  m_Name: (Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)
+  m_EditorClassIdentifier: 
+  broadcast: 1
+  brain: {fileID: 0}
 --- !u!1 &1214283108
 GameObject:
   m_ObjectHideFlags: 0
@@ -4914,6 +4932,8 @@ MonoBehaviour:
   levels:
   - {fileID: 1681066587}
   - {fileID: 1538163350}
+  - {fileID: 2005738458}
+  - {fileID: 1288147498}
 --- !u!114 &1276678274
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5222,6 +5242,28 @@ Tilemap:
     m_DirtyIndex: 0
   - serializedVersion: 1
     m_DirtyIndex: 0
+--- !u!114 &1314355780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b23992c8eb17439887f5e944bf04a40, type: 3}
+  m_Name: (Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)
+  m_EditorClassIdentifier: 
+  broadcast: 1
+  graphModel: {fileID: 0}
+  graphScope: 
+  graphPlaceholders: []
+  BatchSizePlaceholderName: batch_size
+  StatePlacholderName: state
+  RecurrentInPlaceholderName: recurrent_in
+  RecurrentOutPlaceholderName: recurrent_out
+  ObservationPlaceholderName: []
+  ActionPlaceholderName: action
+  brain: {fileID: 0}
 --- !u!1 &1320019863
 GameObject:
   m_ObjectHideFlags: 0
@@ -8044,6 +8086,38 @@ CompositeCollider2D:
         Y: -5937500
       - X: -160000000
         Y: -6093750
+    - - X: -100078128
+        Y: -5625000
+      - X: -101484376
+        Y: -4921875
+      - X: -100390624
+        Y: -5000000
+      - X: -100000000
+        Y: -4687500
+      - X: -100000000
+        Y: -5078125
+      - X: -99375000
+        Y: -5468750
+      - X: -100000000
+        Y: -5937500
+      - X: -100000000
+        Y: -6093750
+    - - X: -110078128
+        Y: -5625000
+      - X: -111484376
+        Y: -4921875
+      - X: -110390624
+        Y: -5000000
+      - X: -110000000
+        Y: -4687500
+      - X: -110000000
+        Y: -5078125
+      - X: -109375000
+        Y: -5468750
+      - X: -110000000
+        Y: -5937500
+      - X: -110000000
+        Y: -6093750
     - - X: -150078128
         Y: -5625000
       - X: -151484368
@@ -8091,38 +8165,6 @@ CompositeCollider2D:
       - X: -120000000
         Y: -5937500
       - X: -120000000
-        Y: -6093750
-    - - X: -110078128
-        Y: -5625000
-      - X: -111484376
-        Y: -4921875
-      - X: -110390624
-        Y: -5000000
-      - X: -110000000
-        Y: -4687500
-      - X: -110000000
-        Y: -5078125
-      - X: -109375000
-        Y: -5468750
-      - X: -110000000
-        Y: -5937500
-      - X: -110000000
-        Y: -6093750
-    - - X: -100078128
-        Y: -5625000
-      - X: -101484376
-        Y: -4921875
-      - X: -100390624
-        Y: -5000000
-      - X: -100000000
-        Y: -4687500
-      - X: -100000000
-        Y: -5078125
-      - X: -99375000
-        Y: -5468750
-      - X: -100000000
-        Y: -5937500
-      - X: -100000000
         Y: -6093750
     - - X: -140078128
         Y: -5625000
@@ -8609,6 +8651,22 @@ CompositeCollider2D:
       - {x: -15.937501, y: -0.546875}
       - {x: -16, y: -0.59375}
       - {x: -16, y: -0.609375}
+    - - {x: -10.0078125, y: -0.5625}
+      - {x: -10.1484375, y: -0.4921875}
+      - {x: -10.0390625, y: -0.5}
+      - {x: -10, y: -0.46875}
+      - {x: -10, y: -0.5078125}
+      - {x: -9.9375, y: -0.546875}
+      - {x: -10, y: -0.59375}
+      - {x: -10, y: -0.609375}
+    - - {x: -11.0078125, y: -0.5625}
+      - {x: -11.1484375, y: -0.4921875}
+      - {x: -11.0390625, y: -0.5}
+      - {x: -11, y: -0.46875}
+      - {x: -11, y: -0.5078125}
+      - {x: -10.9375, y: -0.546875}
+      - {x: -11, y: -0.59375}
+      - {x: -11, y: -0.609375}
     - - {x: -15.0078125, y: -0.5625}
       - {x: -15.148437, y: -0.4921875}
       - {x: -15.0390625, y: -0.5}
@@ -8633,22 +8691,6 @@ CompositeCollider2D:
       - {x: -11.9375, y: -0.546875}
       - {x: -12, y: -0.59375}
       - {x: -12, y: -0.609375}
-    - - {x: -11.0078125, y: -0.5625}
-      - {x: -11.1484375, y: -0.4921875}
-      - {x: -11.0390625, y: -0.5}
-      - {x: -11, y: -0.46875}
-      - {x: -11, y: -0.5078125}
-      - {x: -10.9375, y: -0.546875}
-      - {x: -11, y: -0.59375}
-      - {x: -11, y: -0.609375}
-    - - {x: -10.0078125, y: -0.5625}
-      - {x: -10.1484375, y: -0.4921875}
-      - {x: -10.0390625, y: -0.5}
-      - {x: -10, y: -0.46875}
-      - {x: -10, y: -0.5078125}
-      - {x: -9.9375, y: -0.546875}
-      - {x: -10, y: -0.59375}
-      - {x: -10, y: -0.609375}
   m_VertexDistance: 0.0005
 --- !u!50 &1457309897
 Rigidbody2D:
@@ -9031,8 +9073,8 @@ MonoBehaviour:
   agentStoredAction: []
   memory: []
   id: 0
-  tilesAroundNibblesW: 20
-  tilesAroundNibblesH: 10
+  tilesAroundNibblesW: 18
+  tilesAroundNibblesH: 7
 --- !u!58 &1465528281
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -11073,7 +11115,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1731440808}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 5, y: -5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 24508269}
@@ -11893,7 +11935,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1862488393}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.09, y: 0.77, z: -9}
+  m_LocalPosition: {x: -2.58, y: 3.76, z: -9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1621329711}
@@ -11999,34 +12041,6 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
---- !u!114 &1911977939
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41e9bda8f3cf1492fa74926a530f6f70, type: 3}
-  m_Name: (Clone)(Clone)(Clone)(Clone)(Clone)
-  m_EditorClassIdentifier: 
-  broadcast: 1
-  continuousPlayerActions:
-  - key: 0
-    index: 0
-    value: 1
-  - key: 276
-    index: 1
-    value: 1
-  - key: 275
-    index: 2
-    value: 1
-  - key: 32
-    index: 3
-    value: 1
-  discretePlayerActions: []
-  defaultAction: 0
-  brain: {fileID: 849701452}
 --- !u!1 &1944504845
 GameObject:
   m_ObjectHideFlags: 0
@@ -12051,7 +12065,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1944504845}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.24, y: 0.5, z: -9}
+  m_LocalPosition: {x: -2.58, y: 3.76, z: -9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 524250266}

@@ -12,6 +12,8 @@ namespace MrNibbles
         public const int MoveLeft = 1;
         public const int MoveRight = 2;
         public const int Jump = 3;
+        public const int JumpAndMoveRight = 4;
+        public const int JumpAndMoveLeft = 5;
 
         public int tilesAroundNibblesW = 5;
         public int tilesAroundNibblesH = 5;
@@ -35,29 +37,36 @@ namespace MrNibbles
         {
             var state = new List<float>();
 
-            // Populate the _tiles array with the tiles that surround us
-            var bounds = _tilesController.GetBoundsAround(transform, tilesAroundNibblesW, tilesAroundNibblesH);
-            _tilesController.GetTilesAround(bounds, _tiles);
+            CollectSurroundingTiles();
 
             foreach (var tile in _tiles)
             {
-                state.Add(tile.position.x);
-                state.Add(tile.position.y);
+                // Providing positions relative to the player
+                state.Add(_platformController.transform.position.x - tile.position.x);
+                state.Add(_platformController.transform.position.y - tile.position.y);
                 state.Add(tile.type);
             }
 
-            state.Add(_exitPoint.transform.position.x);
-            state.Add(_exitPoint.transform.position.y);
+            // Provide positions relative to the player
+            state.Add(_platformController.transform.position.x - _exitPoint.transform.position.x);
+            state.Add(_platformController.transform.position.y - _exitPoint.transform.position.y);
 
             state.Add(_platformController.transform.position.x);
             state.Add(_platformController.transform.position.y);
             state.Add(_platformController.Velocity.x);
             state.Add(_platformController.Velocity.y);
+            state.Add(_platformController.IsGrounded ? 1 : 0);
 
             return state;
         }
 
-       public override void AgentStep(float[] actions)
+        private void CollectSurroundingTiles()
+        {
+            var bounds = _tilesController.GetBoundsAround(transform, tilesAroundNibblesW, tilesAroundNibblesH);
+            _tilesController.GetTilesAround(bounds, _tiles);
+        }
+
+        public override void AgentStep(float[] actions)
         {
             PerformActions(actions);
             UpdateRewards();
@@ -66,20 +75,26 @@ namespace MrNibbles
 
         private void PerformActions(float[] actions)
         {
-            var nothing = (int) actions[None] == 1;
-            var moveLeft = (int) actions[MoveLeft] == 1;
-            var moveRight = (int) actions[MoveRight] == 1;
-            var jump = (int) actions[Jump] == 1;
-
+            var action = actions[0];
             var isJumping = false;
             var hozMove = 0f;
 
-            if (moveLeft)
+            if (action == MoveLeft)
                 hozMove = -1f;
-            if (moveRight)
+            else if (action == MoveRight)
                 hozMove = 1f;
-            if (jump)
+            else if (action == Jump)
                 isJumping = true;
+            else if (action == JumpAndMoveRight)
+            {
+                isJumping = true;
+                hozMove = 1f;
+            }
+            else if (action == JumpAndMoveLeft)
+            {
+                isJumping = true;
+                hozMove = -1f;
+            }
 
             _platformController.Tick(hozMove, isJumping);
         }
@@ -89,13 +104,13 @@ namespace MrNibbles
             if (_exitPoint.IsTriggered)
             {
                 Wins++;
-                reward = 10;
+                reward = 1;
                 done = true;
             }
             else if (_spiders.IsTriggered)
             {
                 Deaths++;
-                reward = -10;
+                reward = -1;
                 done = true;
             }
             else
@@ -106,9 +121,10 @@ namespace MrNibbles
 
         private void HandleSessionTooLong()
         {
-            if (CumulativeReward < -80)
+            if (CumulativeReward < -100)
             {
-                reward = -10;
+                reward = -1;
+                Deaths++;
                 done = true;
             }
         }
