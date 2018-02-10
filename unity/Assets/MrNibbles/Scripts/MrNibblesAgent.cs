@@ -105,24 +105,24 @@ namespace MrNibbles
             if (_exitPoint.IsTriggered)
             {
                 Wins++;
-                reward = 5;
+                reward = 1;
                 done = true;
             }
             else if (_spiders.IsTriggered)
             {
                 Deaths++;
-                reward = -5;
+                reward = -1;
                 done = true;
             }
             else
             {
-                reward = -0.01f;
+                reward = -0.001f;
             }
         }
 
         private void HandleSessionTooLong()
         {
-            if (CumulativeReward < -100)
+            if (CumulativeReward < -10)
             {
                 reward = -1;
                 Deaths++;
