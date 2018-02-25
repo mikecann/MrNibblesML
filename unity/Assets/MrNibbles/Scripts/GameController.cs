@@ -21,8 +21,6 @@ namespace MrNibblesML
             SpawnPlayer(CurrentLevel);
         }
 
-        
-
         public void RestartLevel()
         {
             SpawnPlayer(CurrentLevel);

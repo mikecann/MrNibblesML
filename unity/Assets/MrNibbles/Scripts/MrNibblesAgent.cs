@@ -97,7 +97,8 @@ namespace MrNibbles
                 hozMove = -1f;
             }
 
-            _platformController.Tick(hozMove, isJumping);
+            _platformController.HorizontalInput = hozMove;
+            _platformController.JumpInput = isJumping;
         }
 
         private void UpdateRewards()
