@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Cinemachine;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -8,14 +10,13 @@ namespace MrNibblesML
     public class GameController : MonoBehaviour
     {
         public Animator animator;
-        public GameObject[] levels;
+        public int maxLevel = 1;
 
         private PlayerPlatformerController _player;
 
         void Awake()
         {
             _player = FindObjectOfType<PlayerPlatformerController>();
-
             CurrentLevel = GetActiveLevel();
             SpawnPlayer(CurrentLevel);
         }
@@ -51,7 +52,16 @@ namespace MrNibblesML
 
         private GameObject GetNextLevel()
         {
-            return levels[Random.Range(0, levels.Length)];
+            var range = GetLevels().Take(maxLevel+1).ToArray();
+            return range[Random.Range(0, range.Length)];
+        }
+
+        private GameObject[] GetLevels()
+        {
+            var levels = new List<GameObject>();
+            for (int i = 0; i < transform.childCount; i++)
+                levels.Add(transform.GetChild(i).gameObject);
+            return levels.ToArray();
         }
 
         public GameObject CurrentLevel { get; private set; }

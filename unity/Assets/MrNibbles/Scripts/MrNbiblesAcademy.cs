@@ -1,19 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using MrNibblesML;
 using UnityEngine;
 
 namespace MrNibbles
 {
     public class MrNbiblesAcademy : Academy
     {
+        public GameController gameController;
+        public MrNibblesAgent agent;
+
         public override void AcademyReset()
         {
-            base.AcademyReset();
-        }
+            var newLevel = (int) resetParameters["max_level"];
+            if (newLevel > gameController.maxLevel)
+            {
+                agent.Wins = 0;
+                agent.Deaths = 0;
+            }
 
-        public override void AcademyStep()
-        {
-            base.AcademyStep();
+            gameController.maxLevel = newLevel;
         }
     }
 }

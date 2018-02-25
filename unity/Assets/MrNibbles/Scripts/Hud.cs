@@ -22,6 +22,7 @@ namespace MrNibbles
             var str = $"Cumulative Reward: {_agent.CumulativeReward}\n";
             str += $"Deaths: {_agent.Deaths}\n";
             str += $"Wins: {_agent.Wins}\n";
+            str += $"Max Level: {_game.maxLevel}\n";
 
             text.text = str;
         }

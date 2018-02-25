@@ -12,43 +12,62 @@ namespace MrNibbles
         public const int MoveLeft = 1;
         public const int MoveRight = 2;
         public const int Jump = 3;
+        public const int JumpAndMoveRight = 4;
+        public const int JumpAndMoveLeft = 5;
 
-        public BoundsInt tileBoundsToIncludeInState = new BoundsInt(-25, -1, 0, 40, 1, 1);
+        public int tilesAroundNibblesW = 5;
+        public int tilesAroundNibblesH = 5;
 
         private PlayerPlatformerController _platformController;
         private GameController _game;
-        private IEnumerable<TilesController.TileInfo> _tiles;
+        private TilesController.TileInfo[] _tiles;
         private ExitLevelTrigger _exitPoint;
         private SpiderMap _spiders;
+        private TilesController _tilesController;
 
         void Awake()
         {
             _game = FindObjectOfType<GameController>();
             _platformController = GetComponent<PlayerPlatformerController>();
+            _tilesController = _game.CurrentLevel.GetComponentInChildren<TilesController>();
+            _tiles = new TilesController.TileInfo[tilesAroundNibblesW *
+                tilesAroundNibblesH]; 
         }
 
         public override List<float> CollectState()
         {
             var state = new List<float>();
+
+            CollectSurroundingTiles();
+
             foreach (var tile in _tiles)
             {
-                state.Add(tile.position.x);
-                state.Add(tile.position.y);
+                // Providing positions relative to the player
+                state.Add(_platformController.transform.position.x - tile.position.x);
+                state.Add(_platformController.transform.position.y - tile.position.y);
                 state.Add(tile.type);
             }
 
-            state.Add(_exitPoint.transform.position.x);
-            state.Add(_exitPoint.transform.position.y);
+            // Provide positions relative to the player
+            state.Add(_platformController.transform.position.x - _exitPoint.transform.position.x);
+            state.Add(_platformController.transform.position.y - _exitPoint.transform.position.y);
 
             state.Add(_platformController.transform.position.x);
             state.Add(_platformController.transform.position.y);
             state.Add(_platformController.Velocity.x);
             state.Add(_platformController.Velocity.y);
+            state.Add(_platformController.IsGrounded ? 1 : 0);
 
             return state;
         }
 
-       public override void AgentStep(float[] actions)
+        private void CollectSurroundingTiles()
+        {
+            var bounds = _tilesController.GetBoundsAround(transform, tilesAroundNibblesW, tilesAroundNibblesH);
+            _tilesController.GetTilesAround(bounds, _tiles);
+        }
+
+        public override void AgentStep(float[] actions)
         {
             PerformActions(actions);
             UpdateRewards();
@@ -57,22 +76,29 @@ namespace MrNibbles
 
         private void PerformActions(float[] actions)
         {
-            var nothing = (int) actions[None] == 1;
-            var moveLeft = (int) actions[MoveLeft] == 1;
-            var moveRight = (int) actions[MoveRight] == 1;
-            var jump = (int) actions[Jump] == 1;
-
+            var action = actions[0];
             var isJumping = false;
             var hozMove = 0f;
 
-            if (moveLeft)
+            if (action == MoveLeft)
                 hozMove = -1f;
-            if (moveRight)
+            else if (action == MoveRight)
                 hozMove = 1f;
-            if (jump)
+            else if (action == Jump)
                 isJumping = true;
+            else if (action == JumpAndMoveRight)
+            {
+                isJumping = true;
+                hozMove = 1f;
+            }
+            else if (action == JumpAndMoveLeft)
+            {
+                isJumping = true;
+                hozMove = -1f;
+            }
 
-            _platformController.Tick(hozMove, isJumping);
+            _platformController.HorizontalInput = hozMove;
+            _platformController.JumpInput = isJumping;
         }
 
         private void UpdateRewards()
@@ -80,26 +106,27 @@ namespace MrNibbles
             if (_exitPoint.IsTriggered)
             {
                 Wins++;
-                reward = 10;
+                reward = 1;
                 done = true;
             }
             else if (_spiders.IsTriggered)
             {
                 Deaths++;
-                reward = -10;
+                reward = -1;
                 done = true;
             }
             else
             {
-                reward = -0.01f;
+                reward = -0.001f;
             }
         }
 
         private void HandleSessionTooLong()
         {
-            if (CumulativeReward < -80)
+            if (CumulativeReward < -10)
             {
-                reward = -10;
+                reward = -1;
+                Deaths++;
                 done = true;
             }
         }
@@ -107,7 +134,7 @@ namespace MrNibbles
         public override void AgentReset()
         {
             _game.ChangeToNextLevel();
-            _tiles = _game.CurrentLevel.GetComponentInChildren<TilesController>().GetTiles(tileBoundsToIncludeInState);
+            _tilesController = _game.CurrentLevel.GetComponentInChildren<TilesController>();
             _exitPoint = _game.CurrentLevel.GetComponentInChildren<ExitLevelTrigger>();
             _spiders = FindObjectOfType<SpiderMap>();
         }

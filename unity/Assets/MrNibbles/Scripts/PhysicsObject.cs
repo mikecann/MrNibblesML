@@ -37,6 +37,11 @@ namespace MrNibblesML
         {
         }
 
+        void FixedUpdate()
+        {
+            Tick(HorizontalInput, JumpInput);
+        }
+      
         public void Tick(float horizontalMovement, bool isjumping)
         {
             targetVelocity = Vector2.zero;
@@ -102,5 +107,7 @@ namespace MrNibblesML
 
         public bool IsGrounded => grounded;
         public Vector2 Velocity => targetVelocity;
+        public float HorizontalInput { get; set; }
+        public bool JumpInput { get; set; }
     }
 }

@@ -11,7 +11,7 @@ namespace MrNibblesML
 
         private SpriteRenderer spriteRenderer;
         private Animator animator;
-
+       
         void Awake()
         {
             spriteRenderer = GetComponent<SpriteRenderer>();
